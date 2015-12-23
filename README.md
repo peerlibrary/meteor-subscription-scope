@@ -37,7 +37,8 @@ extended with:
 Example
 -------
 
-If on the server side you have such publish endpoint:
+If on the server side you have such publish endpoint (using
+[MongoDB full-text search](https://docs.mongodb.org/v2.6/reference/operator/query/text/)):
 
 ```javascript
 Meteor.publish('search-documents', function (search) {
