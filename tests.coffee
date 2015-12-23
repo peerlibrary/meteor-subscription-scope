@@ -41,11 +41,11 @@ class BasicTestCase extends ClassyTestCase
       @subscription4 = @assertSubscribeSuccessful 'testDataPublish', 3, 0, @expect()
   ,
     ->
-      @assertEqual TestDataCollection.find({}, {fields: {_id: 0, i: 1}, sort: {i: 1}}).fetch(), []
-      @assertEqual TestDataCollection.find(@subscription1.scopeQuery(), {fields: {_id: 0, i: 1}, sort: {i: 1}}).fetch(), []
-      @assertEqual TestDataCollection.find(@subscription2.scopeQuery(), {fields: {_id: 0, i: 1}, sort: {i: 1}}).fetch(), []
-      @assertEqual TestDataCollection.find(@subscription3.scopeQuery(), {fields: {_id: 0, i: 1}, sort: {i: 1}}).fetch(), []
-      @assertEqual TestDataCollection.find(@subscription4.scopeQuery(), {fields: {_id: 0, i: 1}, sort: {i: 1}}).fetch(), []
+      @assertEqual TestDataCollection.find({}, {fields: {_id: 0}, sort: {i: 1}}).fetch(), []
+      @assertEqual TestDataCollection.find(@subscription1.scopeQuery(), {fields: {_id: 0}, sort: {i: 1}}).fetch(), []
+      @assertEqual TestDataCollection.find(@subscription2.scopeQuery(), {fields: {_id: 0}, sort: {i: 1}}).fetch(), []
+      @assertEqual TestDataCollection.find(@subscription3.scopeQuery(), {fields: {_id: 0}, sort: {i: 1}}).fetch(), []
+      @assertEqual TestDataCollection.find(@subscription4.scopeQuery(), {fields: {_id: 0}, sort: {i: 1}}).fetch(), []
 
       @documents = []
 
@@ -63,11 +63,11 @@ class BasicTestCase extends ClassyTestCase
       Meteor.setTimeout @expect(), 100 # ms
   ,
     ->
-      @assertEqual TestDataCollection.find({}, {fields: {_id: 0, i: 1}, sort: {i: 1}}).fetch(), @documents
-      @assertEqual TestDataCollection.find(@subscription1.scopeQuery(), {fields: {_id: 0, i: 1}, sort: {i: 1}}).fetch(), _.filter @documents, ({i}) -> i % 2 is 0
-      @assertEqual TestDataCollection.find(@subscription2.scopeQuery(), {fields: {_id: 0, i: 1}, sort: {i: 1}}).fetch(), _.filter @documents, ({i}) -> i % 2 is 1
-      @assertEqual TestDataCollection.find(@subscription3.scopeQuery(), {fields: {_id: 0, i: 1}, sort: {i: 1}}).fetch(), _.filter @documents, ({i}) -> i % 6 is 0
-      @assertEqual TestDataCollection.find(@subscription4.scopeQuery(), {fields: {_id: 0, i: 1}, sort: {i: 1}}).fetch(), _.filter @documents, ({i}) -> i % 3 is 0
+      @assertEqual TestDataCollection.find({}, {fields: {_id: 0}, sort: {i: 1}}).fetch(), @documents
+      @assertEqual TestDataCollection.find(@subscription1.scopeQuery(), {fields: {_id: 0}, sort: {i: 1}}).fetch(), _.filter @documents, ({i}) -> i % 2 is 0
+      @assertEqual TestDataCollection.find(@subscription2.scopeQuery(), {fields: {_id: 0}, sort: {i: 1}}).fetch(), _.filter @documents, ({i}) -> i % 2 is 1
+      @assertEqual TestDataCollection.find(@subscription3.scopeQuery(), {fields: {_id: 0}, sort: {i: 1}}).fetch(), _.filter @documents, ({i}) -> i % 6 is 0
+      @assertEqual TestDataCollection.find(@subscription4.scopeQuery(), {fields: {_id: 0}, sort: {i: 1}}).fetch(), _.filter @documents, ({i}) -> i % 3 is 0
 
       for i in [0...10]
         doc = {i: i}
@@ -83,11 +83,11 @@ class BasicTestCase extends ClassyTestCase
       Meteor.setTimeout @expect(), 100 # ms
   ,
     ->
-      @assertEqual TestDataCollection.find({}, {fields: {_id: 0, i: 1}, sort: {i: 1}}).fetch(), @documents
-      @assertEqual TestDataCollection.find(@subscription1.scopeQuery(), {fields: {_id: 0, i: 1}, sort: {i: 1}}).fetch(), _.filter @documents, ({i}) -> i % 2 is 0
-      @assertEqual TestDataCollection.find(@subscription2.scopeQuery(), {fields: {_id: 0, i: 1}, sort: {i: 1}}).fetch(), _.filter @documents, ({i}) -> i % 2 is 1
-      @assertEqual TestDataCollection.find(@subscription3.scopeQuery(), {fields: {_id: 0, i: 1}, sort: {i: 1}}).fetch(), _.filter @documents, ({i}) -> i % 6 is 0
-      @assertEqual TestDataCollection.find(@subscription4.scopeQuery(), {fields: {_id: 0, i: 1}, sort: {i: 1}}).fetch(), _.filter @documents, ({i}) -> i % 3 is 0
+      @assertEqual TestDataCollection.find({}, {fields: {_id: 0}, sort: {i: 1}}).fetch(), @documents
+      @assertEqual TestDataCollection.find(@subscription1.scopeQuery(), {fields: {_id: 0}, sort: {i: 1}}).fetch(), _.filter @documents, ({i}) -> i % 2 is 0
+      @assertEqual TestDataCollection.find(@subscription2.scopeQuery(), {fields: {_id: 0}, sort: {i: 1}}).fetch(), _.filter @documents, ({i}) -> i % 2 is 1
+      @assertEqual TestDataCollection.find(@subscription3.scopeQuery(), {fields: {_id: 0}, sort: {i: 1}}).fetch(), _.filter @documents, ({i}) -> i % 6 is 0
+      @assertEqual TestDataCollection.find(@subscription4.scopeQuery(), {fields: {_id: 0}, sort: {i: 1}}).fetch(), _.filter @documents, ({i}) -> i % 3 is 0
 
       @subscription2.stop()
 
@@ -95,11 +95,17 @@ class BasicTestCase extends ClassyTestCase
       Meteor.setTimeout @expect(), 100 # ms
   ,
     ->
-      @assertEqual TestDataCollection.find({}, {fields: {_id: 0, i: 1}, sort: {i: 1}}).fetch(), _.filter @documents, ({i}) -> i % 2 is 0 or i % 6 is 0 or i % 3 is 0
-      @assertEqual TestDataCollection.find(@subscription1.scopeQuery(), {fields: {_id: 0, i: 1}, sort: {i: 1}}).fetch(), _.filter @documents, ({i}) -> i % 2 is 0
-      @assertEqual TestDataCollection.find(@subscription2.scopeQuery(), {fields: {_id: 0, i: 1}, sort: {i: 1}}).fetch(), []
-      @assertEqual TestDataCollection.find(@subscription3.scopeQuery(), {fields: {_id: 0, i: 1}, sort: {i: 1}}).fetch(), _.filter @documents, ({i}) -> i % 6 is 0
-      @assertEqual TestDataCollection.find(@subscription4.scopeQuery(), {fields: {_id: 0, i: 1}, sort: {i: 1}}).fetch(), _.filter @documents, ({i}) -> i % 3 is 0
+      fields = {_id: 0, i: 1}
+      fields["_sub_#{@subscription1.subscriptionId}"] = 1
+      fields["_sub_#{@subscription2.subscriptionId}"] = 1
+      fields["_sub_#{@subscription3.subscriptionId}"] = 1
+      fields["_sub_#{@subscription4.subscriptionId}"] = 1
+
+      @assertEqual TestDataCollection.find({}, {fields: fields, sort: {i: 1}}).fetch(), _.filter @documents, ({i}) -> i % 2 is 0 or i % 6 is 0 or i % 3 is 0
+      @assertEqual TestDataCollection.find(@subscription1.scopeQuery(), {fields: fields, sort: {i: 1}}).fetch(), _.filter @documents, ({i}) -> i % 2 is 0
+      @assertEqual TestDataCollection.find(@subscription2.scopeQuery(), {fields: fields, sort: {i: 1}}).fetch(), []
+      @assertEqual TestDataCollection.find(@subscription3.scopeQuery(), {fields: fields, sort: {i: 1}}).fetch(), _.filter @documents, ({i}) -> i % 6 is 0
+      @assertEqual TestDataCollection.find(@subscription4.scopeQuery(), {fields: fields, sort: {i: 1}}).fetch(), _.filter @documents, ({i}) -> i % 3 is 0
 
       @subscription3.stop()
 
