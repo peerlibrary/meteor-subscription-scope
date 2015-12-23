@@ -34,8 +34,8 @@ extended with:
 * `enableScope()` – when enabled, for subscriptions to this publish endpoint, clients can use `scopeQuery()`
   to limit queries only to the subscription
 
-Example
--------
+Examples
+--------
 
 If on the server side you have such publish endpoint (using
 [MongoDB full-text search](https://docs.mongodb.org/v2.6/reference/operator/query/text/)):
