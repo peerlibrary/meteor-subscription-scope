@@ -15,7 +15,7 @@ Meteor.publish = (name, publishFunction) ->
       # Add our scoping field.
       if enabled
         fields = _.clone fields
-        fields[scopeFieldName] = true
+        fields[scopeFieldName] = 1
 
       originalAdded.call @, collectionName, id, fields
 

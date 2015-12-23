@@ -6,7 +6,7 @@ Connection::subscribe = (args...) ->
 
   handle.scopeQuery = ->
     query = {}
-    query["_sub_#{handle.subscriptionId}"] = true
+    query["_sub_#{handle.subscriptionId}"] = 1
     query
 
   handle
