@@ -15,6 +15,11 @@ Package.onUse(function (api) {
     'minimongo'
   ]);
 
+  // 3rd party dependencies.
+  api.use([
+    'peerlibrary:extend-publish@0.3.0'
+  ]);
+
   api.addFiles([
     'server.coffee'
   ], 'server');

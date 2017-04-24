@@ -1,6 +1,5 @@
-originalPublish = Meteor.publish
-Meteor.publish = (name, publishFunction) ->
-  originalPublish name, (args...) ->
+extendPublish (name, func, options) ->
+  newFunc = (args...) ->
     publish = @
 
     scopeFieldName = "_sub_#{publish._subscriptionId}"
@@ -28,4 +27,6 @@ Meteor.publish = (name, publishFunction) ->
 
       originalChanged.call @, collectionName, id, fields
 
-    publishFunction.apply publish, args
+    func.apply publish, args
+
+  [name, newFunc, options]
