@@ -1,7 +1,7 @@
 Package.describe({
   name: 'peerlibrary:subscription-scope',
   summary: "Scope queries on collections to subscriptions",
-  version: '0.2.0',
+  version: '0.3.0',
   git: 'https://github.com/peerlibrary/meteor-subscription-scope.git'
 });
 
