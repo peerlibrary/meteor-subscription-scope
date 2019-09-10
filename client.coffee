@@ -22,7 +22,10 @@ LocalCollection._compileProjection = (fields) ->
   (obj) ->
     res = fun obj
 
-    for field of res when field.lastIndexOf('_sub_', 0) is 0
-      delete res[field]
+    fields = Object.keys(res);
+
+    for i in [0...fields.length]
+      if fields[i].lastIndexOf('_sub_', 0) is 0
+        delete res[fields[i]]
 
     res
