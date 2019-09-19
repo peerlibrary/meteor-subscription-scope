@@ -6,11 +6,11 @@ Package.describe({
 });
 
 Package.onUse(function (api) {
-  api.versionsFrom('METEOR@1.4.4.5');
+  api.versionsFrom('METEOR@1.6.1.3');
 
   // Core dependencies.
   api.use([
-    'coffeescript@2.0.3_3',
+    'coffeescript',
     'ecmascript',
     'underscore',
     'minimongo'
@@ -31,11 +31,11 @@ Package.onUse(function (api) {
 });
 
 Package.onTest(function (api) {
-  api.versionsFrom('METEOR@1.4.4.5');
+  api.versionsFrom('METEOR@1.6.1.3');
 
   // Core dependencies.
   api.use([
-    'coffeescript@2.0.3_3',
+    'coffeescript',
     'ecmascript',
     'random',
     'underscore',
