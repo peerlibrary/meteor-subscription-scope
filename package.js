@@ -1,16 +1,16 @@
 Package.describe({
   name: 'peerlibrary:subscription-scope',
   summary: "Scope queries on collections to subscriptions",
-  version: '0.4.0',
+  version: '0.5.0',
   git: 'https://github.com/peerlibrary/meteor-subscription-scope.git'
 });
 
 Package.onUse(function (api) {
-  api.versionsFrom('METEOR@1.6.1.3');
+  api.versionsFrom('METEOR@1.8.1');
 
   // Core dependencies.
   api.use([
-    'coffeescript',
+    'coffeescript@2.4.1',
     'ecmascript',
     'underscore',
     'minimongo'
@@ -18,7 +18,7 @@ Package.onUse(function (api) {
 
   // 3rd party dependencies.
   api.use([
-    'peerlibrary:extend-publish@0.5.0'
+    'peerlibrary:extend-publish@0.6.0'
   ]);
 
   api.addFiles([
@@ -31,11 +31,11 @@ Package.onUse(function (api) {
 });
 
 Package.onTest(function (api) {
-  api.versionsFrom('METEOR@1.6.1.3');
+  api.versionsFrom('METEOR@1.8.1');
 
   // Core dependencies.
   api.use([
-    'coffeescript',
+    'coffeescript@2.4.1',
     'ecmascript',
     'random',
     'underscore',
@@ -49,7 +49,7 @@ Package.onTest(function (api) {
 
   // 3rd party dependencies.
   api.use([
-    'peerlibrary:classy-test@0.3.0'
+    'peerlibrary:classy-test@0.4.0'
   ]);
 
   api.addFiles([
